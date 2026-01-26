@@ -1,0 +1,60 @@
+{
+  "name": "moonlight-tizen-installer-electron",
+  "version": "1.0.0",
+  "description": "Desktop app for installing Moonlight on Samsung Tizen TVs",
+  "homepage": "https://github.com/SmookeyDev/MoonlightTizenInstaller",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:linux": "electron-builder --linux",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac"
+  },
+  "author": {
+    "name": "SmookeyDev",
+    "email": "icaro@soarlabz.com"
+  },
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "build": {
+    "appId": "com.smookeydev.moonlight-tizen-installer",
+    "productName": "Moonlight Tizen Installer",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js"
+    ],
+    "extraResources": [
+      {
+        "from": "../client/services/tizenbrew-installer-service/dist",
+        "to": "service"
+      },
+      {
+        "from": "../client/ui/dist",
+        "to": "ui"
+      },
+      {
+        "from": "../client/ui/src/assets/moonlight-icon.png",
+        "to": "moonlight-icon.png"
+      }
+    ],
+    "linux": {
+      "target": ["AppImage"],
+      "icon": "../client/ui/src/assets/moonlight-icon.png",
+      "category": "Utility"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "../client/ui/src/assets/moonlight-icon.png"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "../client/ui/src/assets/moonlight-icon.png"
+    }
+  }
+}
