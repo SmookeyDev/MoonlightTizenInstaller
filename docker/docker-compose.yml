@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  moonlight-installer:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8091:8091"
+    volumes:
+      - moonlight-config:/root/share
+    restart: unless-stopped
+    container_name: moonlight-tizen-installer
+
+volumes:
+  moonlight-config:
