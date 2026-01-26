@@ -21,12 +21,11 @@
         "resigningDeviceSameNetwork": "Zorg ervoor dat uw apparaat op het zelfde netwerk is als uw TV."
     },
     "installer": {
-        "installTB": "TizenBrew installeren",
-        "updateTB": "TizenBrew updaten",
-        "installFromUSB": "Installeren van USB",
-        "installFromGH": "Installeren van GitHub",
-        "installingAgain": "TizenBrew Installer is geinstalleerd als een USB Demo Package. Het zal nu worden geinstalleerd als een normaal pakket.",
-        "alreadyInstalled": "TizenBrew Installer als een USB Demo Package is geinstalleerd. U kunt het nu verwijderen."
+        "installTB": "Moonlight installeren",
+        "updateTB": "Moonlight updaten",
+        "connectToTV": "Verbinden met TV",
+        "installingAgain": "Moonlight Installer is geinstalleerd als een USB Demo Package. Het zal nu worden geinstalleerd als een normaal pakket.",
+        "alreadyInstalled": "Moonlight Installer als een USB Demo Package is geinstalleerd. U kunt het nu verwijderen."
     },
     "__contributors": [
         "owen-the-kid"

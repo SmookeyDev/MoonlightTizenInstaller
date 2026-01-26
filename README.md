@@ -1,41 +1,82 @@
-# TizenBrew Installer
+# Moonlight Tizen Installer
 
-TizenBrew Installer allows you to install TizenBrew and other Tizen apps easily, with resigning support for Tizen 7+ TVs!
+Install Moonlight on Samsung Tizen TVs easily, with automatic resigning support for Tizen 7+ TVs.
 
-[Discord Server Invite](https://discord.gg/m2P7v8Y2qR)
+## Requirements
 
-## Installation
+- Samsung TV with Developer Mode enabled
+- PC, Mac, Linux, or Android device (via Termux)
 
-To install TizenBrew Installer, you'll need a PC or a mobile device and a USB Stick. If you do not have a USB Stick or if you're having trouble installing via USB Stick, you can use TizenBrew Installer Desktop, which can be found in the releases section. More information about TizenBrew Installer Desktop can be found below.
+## Installation Options
 
-First, download the [latest userwidget.zip file](https://github.com/reisxd/TizenBrewInstaller/releases/latest) from releases. After downloading it, extract the zip file directly to your USB Stick and plug it in to your TV.
+### Option 1: Electron Desktop App
 
-After plugging the USB Stick in, the TV should show a notification saying the app is being installed. 
+Download the latest release from the [releases section](https://github.com/SmookeyDev/MoonlightTizenInstaller/releases/latest).
 
-After it's installed, you'll need to set Developer Mode Host PC IP to `127.0.0.1`.
+### Option 2: Docker (for Termux/servers)
 
-You can follow [this](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html#Connecting-the-TV-and-SDK) guide for more information.
+```bash
+git clone https://github.com/SmookeyDev/MoonlightTizenInstaller.git
+cd MoonlightTizenInstaller/docker
+docker-compose up -d
+```
 
-Note: If your TVs language is RTL (right to left), the IP must be `1.0.0.127`.
+Access the installer at `http://localhost:8091`
 
-After setting the Developer Mode settings, you should be able to use TizenBrew Installer.
+### Option 3: Manual Installation
 
-## TizenBrew Installer Desktop
+1. Install [Node.js](https://nodejs.org/) (on Android/Termux: `pkg install nodejs`)
 
-TizenBrew Installer Desktop is TizenBrew Installer on your PC or (Android only) mobile device. Download the latest release from the [releases section](https://github.com/reisxd/TizenBrewInstaller/releases/latest).
+2. Install [git](https://git-scm.com/) (on Android/Termux: `pkg install git`)
 
-### Using TizenBrew Installer Desktop manually
+3. Clone the repository:
+   ```bash
+   git clone https://github.com/SmookeyDev/MoonlightTizenInstaller.git
+   ```
 
-If you're using Termux or would like to use TizenBrew Installer Desktop manually, you can follow these steps:
+4. Build the UI:
+   ```bash
+   cd MoonlightTizenInstaller/client/ui
+   npm install --force && npm run build
+   ```
 
-1. Install [Node.js](https://nodejs.org/) (on Android, you can use [Termux](https://termux.com/) and install Node.js via `pkg install nodejs`).
+5. Install service dependencies:
+   ```bash
+   cd ../services/tizenbrew-installer-service
+   npm install
+   ```
 
-2. Install [git](https://git-scm.com/) if you don't have it already (on Android/Termux, use `pkg install git`).
+6. Run the service:
+   ```bash
+   node .
+   ```
 
-3. Clone the repository using `git clone https://github.com/reisxd/TizenBrewInstaller.git`.
+7. Open `http://localhost:8091` in your browser
 
-4. Navigate to the `ui` folder using `cd TizenBrewInstaller/client/ui` and run `npm install --force && npm run build`.
+## TV Setup
 
-5. Navigate to the `tizenbrew-installer-service` folder using `cd ../services/tizenbrew-installer-service` and run `npm install`.
+1. Enable Developer Mode on your Samsung TV
+2. Set the Host PC IP to `127.0.0.1` (or `1.0.0.127` for RTL languages)
+3. Follow [Samsung's guide](https://developer.samsung.com/smarttv/develop/getting-started/using-sdk/tv-device.html#Connecting-the-TV-and-SDK) for more details
 
-6. Run the application using `node .`.
+## Building from Source
+
+### Electron App
+
+```bash
+cd electron
+npm install
+npm run build
+```
+
+### Docker Image
+
+```bash
+cd docker
+docker-compose build
+```
+
+## Credits
+
+- Based on [TizenBrew Installer](https://github.com/reisxd/TizenBrewInstaller) by reisxd
+- [Moonlight Tizen](https://github.com/OneLiberty/moonlight-chrome-tizen)

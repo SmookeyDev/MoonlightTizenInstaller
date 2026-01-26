@@ -4,7 +4,7 @@
         "started": "Service started."
     },
     "errors": {
-        "debuggingNotEnabled": "Error: Could not connect to the SDB Daemon. Are you sure you changed the Host PC IP to 127.0.0.1? If you have, hold the power button till you see the Samsung logo."
+        "serviceNotRunning": "Service not running. Please start the service first."
     },
     "installStatus": {
         "fetching": "Fetching package",
@@ -16,25 +16,38 @@
     },
     "resigning": {
         "resigningRequired": "Resigning required",
-        "resigningRequiredDesc": "Since Tizen 7, all packages must be resigned with a Samsung Certificate.\nPlease scan the QR code to sign in to your Samsung account and then copy the response JSON you get after signing in.",
         "resigningRequiredPCDesc": "Since Tizen 7, all packages must be resigned with a Samsung Certificate.\nPlease click the button below to sign in to your Samsung account.",
-        "resigningRequiredOpenAuthButton": "Sign in to Samsung Account",
-        "resigningRequiredAccessInfo": "After copying the JSON response, go into http://{{ip}}:4794 and paste it into the input field and press the \"Submit\" button.",
-        "resigningDeviceSameNetwork": "Make sure your device is on the same network as your TV."
+        "resigningRequiredOpenAuthButton": "Sign in to Samsung Account"
     },
     "installer": {
-        "installTB": "Install TizenBrew",
-        "installTBI": "Install TizenBrew Installer",
+        "installTB": "Install Moonlight",
         "connectToTV": "Connect to TV",
-        "updateTB": "Update TizenBrew",
-        "installFromUSB": "Install from USB",
-        "installFromGH": "Install from GitHub",
-        "installingAgain": "TizenBrew Installer is installed as an USB Demo Package. It will now be reinstalled as a normal package.",
-        "alreadyInstalled": "TizenBrew Installer as an USB Demo Package is installed. You can now uninstall it."
+        "updateTB": "Update Moonlight",
+        "tvIpAddress": "TV IP Address",
+        "connect": "Connect",
+        "connected": "Connected",
+        "devModeHint": "Make sure Developer Mode is enabled on your TV with Host PC IP set to this computer's IP",
+        "connectedSuccess": "Successfully connected to your Samsung TV",
+        "streamDescription": "Stream games from your PC to your Samsung TV",
+        "advancedOptions": "Advanced Options",
+        "hideAdvancedOptions": "Hide Advanced Options",
+        "customRepository": "Custom Repository",
+        "repoFormatHint": "GitHub repository in format: owner/repo",
+        "repository": "Repository"
     },
     "installerDesktop": {
         "sdbConnectionRefused": "Could not connect to the SDB Daemon. Make sure that the TV is on and that the IP is correct.",
         "sdbConnectionReset": "Could not connect to the SDB Daemon. Either you haven't set the Host PC IP to this device's IP, or you didn't restart the TV properly. Hold the power button till you see the Samsung logo to restart the TV."
+    },
+    "about": {
+        "title": "Moonlight Installer",
+        "description": "Stream games from your PC to your Samsung TV",
+        "moonlightTizen": "Moonlight Tizen",
+        "moonlightInstaller": "Moonlight Installer",
+        "github": "GitHub",
+        "tizen": "Tizen",
+        "tvModel": "TV Model",
+        "basedOn": "Based on TizenBrew Installer by reisxd"
     },
     "__contributors": [
         "reisxd"

@@ -21,12 +21,11 @@
     "resigningDeviceSameNetwork": "Votre appareil doit être sur le même réseau que votre TV."
   },
   "installer": {
-    "installTB": "Installer TizenBrew",
-    "updateTB": "Mettre à jour TizenBrew",
-    "installFromUSB": "Installer à partir d'un périphérique USB",
-    "installFromGH": "Installer depuis GitHub",
-    "installingAgain": "TizenBrew Installer est installé en tant que Paquet Démo USB. Il va maintenant être réinstallé en tant que paquet normal.",
-    "alreadyInstalled": "Le Paquet Démo USB de TizenBrew Installer est installé. Vous pouvez maintenant le supprimer."
+    "installTB": "Installer Moonlight",
+    "updateTB": "Mettre à jour Moonlight",
+    "connectToTV": "Connecter à la TV",
+    "installingAgain": "Moonlight Installer est installé en tant que Paquet Démo USB. Il va maintenant être réinstallé en tant que paquet normal.",
+    "alreadyInstalled": "Le Paquet Démo USB de Moonlight Installer est installé. Vous pouvez maintenant le supprimer."
   },
   "__contributors": [
     "Kiriox94"

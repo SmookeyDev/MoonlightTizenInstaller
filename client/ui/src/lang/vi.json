@@ -21,12 +21,11 @@
         "resigningDeviceSameNetwork": "Thiết bị di động và TV của bạn cần được kết nối chung 1 mạng Wi-Fi/LAN để đảm bảo hoạt động."
     },
     "installer": {
-        "installTB": "Cài đặt TizenBrew",
-        "updateTB": "Cập nhật TizenBrew",
-        "installFromUSB": "Cài đặt app từ USB",
-        "installFromGH": "Cài đặt app từ GitHub",
-        "installingAgain": "TizenBrew Installer đã được cài đặt dưới dạng USB Demo Package. Bây giờ app sẽ tự cài lại như 1 app bình thường.",
-        "alreadyInstalled": "TizenBrew Installer dưới dạng USB Demo Package đang được cài đặt. Bây giờ bạn có thể gỡ cài đặt gói Demo này."
+        "installTB": "Cài đặt Moonlight",
+        "updateTB": "Cập nhật Moonlight",
+        "connectToTV": "Kết nối TV",
+        "installingAgain": "Moonlight Installer đã được cài đặt dưới dạng USB Demo Package. Bây giờ app sẽ tự cài lại như 1 app bình thường.",
+        "alreadyInstalled": "Moonlight Installer dưới dạng USB Demo Package đang được cài đặt. Bây giờ bạn có thể gỡ cài đặt gói Demo này."
     },
     "__contributors": [
         "AXTRplayer (Intel Core i5-8350u)"

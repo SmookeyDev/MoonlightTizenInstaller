@@ -21,12 +21,11 @@
         "resigningDeviceSameNetwork": "Уверите се да је ваш уређај на истој мрежи као и ваш телевизор."
     },
     "installer": {
-        "installTB": "Инсталација TizenBrew",
-        "updateTB": "Ажурирање TizenBrew",
-        "installFromUSB": "Инсталација са USB флешке",
-        "installFromGH": "Инсталација са GitHub-а",
-        "installingAgain": "TizenBrew Installer је инсталиран као USB Demo пакет. Сада ће бити поново инсталиран као обичан пакет.",
-        "alreadyInstalled": "TizenBrew Installer као USB Demo пакет је инсталиран. Сада га можете деинсталирати."
+        "installTB": "Инсталација Moonlight",
+        "updateTB": "Ажурирање Moonlight",
+        "connectToTV": "Повежите се са ТВ",
+        "installingAgain": "Moonlight Installer је инсталиран као USB Demo пакет. Сада ће бити поново инсталиран као обичан пакет.",
+        "alreadyInstalled": "Moonlight Installer као USB Demo пакет је инсталиран. Сада га можете деинсталирати."
     },
     "__contributors": [
         "milovanovic"
