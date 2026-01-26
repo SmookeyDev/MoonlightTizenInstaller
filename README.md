@@ -98,13 +98,13 @@ git clone https://github.com/SmookeyDev/MoonlightTizenInstaller.git
 cd MoonlightTizenInstaller
 
 # Install dependencies
-npm install
+pnpm install
 
 # Build UI and service
-npm run build
+pnpm run build
 
 # Run the service
-npm run dev
+pnpm run dev
 ```
 
 ## 🚀 Usage
@@ -143,25 +143,6 @@ npm run dev
 
 ## 🔧 Technical Details
 
-### How It Works
-
-```
-┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│   Your PC       │     │    Installer    │     │   Samsung TV    │
-│                 │     │                 │     │                 │
-│  ┌───────────┐  │     │  ┌───────────┐  │     │  ┌───────────┐  │
-│  │ Electron  │──┼─────┼─▶│  Service  │──┼─────┼─▶│    SDB    │  │
-│  │    App    │  │     │  │  (Node)   │  │     │  │  Daemon   │  │
-│  └───────────┘  │     │  └───────────┘  │     │  └───────────┘  │
-│                 │     │        │        │     │        │        │
-│                 │     │        ▼        │     │        ▼        │
-│                 │     │  ┌───────────┐  │     │  ┌───────────┐  │
-│                 │     │  │  GitHub   │  │     │  │ Moonlight │  │
-│                 │     │  │ Download  │  │     │  │ Installed │  │
-│                 │     │  └───────────┘  │     │  └───────────┘  │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
-```
-
 ### Certificate Flow (Tizen 7+)
 
 Samsung requires apps to be signed with a valid certificate on Tizen 7+:
@@ -180,11 +161,11 @@ Samsung requires apps to be signed with a valid certificate on Tizen 7+:
 
 | Command | Description |
 |---------|-------------|
-| `npm install` | Install all dependencies |
-| `npm run build` | Build UI and service |
-| `npm run dev` | Start development server |
-| `npm run electron` | Run Electron app |
-| `npm run electron:build` | Build Electron distributable |
+| `pnpm install` | Install all dependencies |
+| `pnpm run build` | Build UI and service |
+| `pnpm run dev` | Start development server |
+| `pnpm run electron` | Run Electron app |
+| `pnpm run electron:build` | Build Electron distributable |
 
 ## 💬 Support
 
