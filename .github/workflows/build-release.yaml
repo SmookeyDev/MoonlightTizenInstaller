@@ -28,32 +28,34 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install root dependencies
-        run: npm install
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
 
       - name: Install service dependencies
         working-directory: client/services/tizenbrew-installer-service
-        run: npm install
+        run: pnpm install
 
       - name: Install UI dependencies
         working-directory: client/ui
-        run: npm install --force
+        run: pnpm install
 
       - name: Build UI
         working-directory: client/ui
-        run: npm run build
+        run: pnpm run build
 
       - name: Build service bundle
         working-directory: client/services/tizenbrew-installer-service
-        run: npm run build
+        run: pnpm run build
 
       - name: Install Electron dependencies
         working-directory: electron
-        run: npm install
+        run: pnpm install
 
       - name: Build Electron app
         working-directory: electron
-        run: npm run build
+        run: pnpm run build
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
