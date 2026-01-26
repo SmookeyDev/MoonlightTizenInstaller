@@ -2,13 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+#app {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 .focus {
-    outline: #1ca7ca solid 2px;
-    box-shadow: #2396b3 0px 0px 10px 3px;
+    outline: #6366f1 solid 2px;
 }
 
 .hover-effect:hover {
-    outline: #1ca7ca solid 2px;
-    box-shadow: #2396b3 0px 0px 10px 3px;
-    transition: box-shadow 0.1s ease-in-out, outline 0.1s ease-in-out;
+    outline: #6366f1 solid 2px;
+    transition: outline 0.1s ease-in-out;
 }

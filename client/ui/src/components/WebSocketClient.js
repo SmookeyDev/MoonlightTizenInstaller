@@ -2,7 +2,6 @@ import i18next from 'i18next';
 
 const Events = {
     InstallPackage: 1,
-    NavigateDirectory: 2,
     Error: 3,
     InstallationStatus: 4,
     DeleteConfiguration: 5,
@@ -60,15 +59,6 @@ class Client {
                 break;
             }
 
-            case Events.NavigateDirectory: {
-                // Handle directory navigation
-                this.context.dispatch({
-                    type: 'SET_DIRECTORY',
-                    payload: payload
-                });
-                break;
-            }
-
             case Events.Error: {
                 // Handle errors
                 this.context.dispatch({
@@ -96,7 +86,14 @@ class Client {
                     type: 'SET_CONNECTED_TO_TV',
                     payload: payload.success
                 });
-                
+
+                if (payload.success && payload.tvInfo) {
+                    this.context.dispatch({
+                        type: 'SET_TV_INFO',
+                        payload: payload.tvInfo
+                    });
+                }
+
                 if (!payload.success) {
                     this.context.dispatch({
                         type: 'SET_ERROR',
