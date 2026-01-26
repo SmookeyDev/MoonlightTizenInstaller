@@ -1,122 +1,86 @@
-name: Build TizenBrew Installer and Release
-
+name: Build Electron App
 
 on:
   push:
+    branches:
+      - main
     tags:
-      - 'v*.*.*'
-  schedule:
-    - cron: '0 0 1 */1 *'
+      - 'v*'
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Clone repo with full history and tags
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # fetch full history for tags
-          fetch-tags: true
-      
-      - name: Fetch tags (safety)
-        run: |
-          git fetch --tags --force --prune
-      - name: Determine release tag
-        id: version
-        run: |
-          TAG=$(git describe --tags --abbrev=0 2>/dev/null || true)
-          if [ -z "$TAG" ]; then
-            echo "No tags found; deriving from config.xml or fallback"
-            if [ -f client/config.xml ]; then
-              # Extract version from config.xml's version attribute
-              CFG_VER=$(sed -n 's/.*version="\([^"]*\)".*/\1/p' client/config.xml | head -n1)
-              if [ -n "$CFG_VER" ]; then
-                TAG=v$CFG_VER
-              else
-                TAG=v0.0.0-${GITHUB_SHA:0:7}
-              fi
-            else
-              TAG=v0.0.0-${GITHUB_SHA:0:7}
-            fi
-          fi
-          echo "RELEASE_VERSION=$TAG" >> $GITHUB_ENV
-      
-      - name: Install ldid (required system tool)
-        uses: MOZGIII/install-ldid-action@v1
-        with:
-          tag: v2.1.5-procursus7
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
-      - name: Install modules, transpile service and build service
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Install service dependencies
         working-directory: client/services/tizenbrew-installer-service
-        run: |
-          sudo apt update
-          sudo apt install -y expect zip coreutils
-          npm install
-          npm install -g @vercel/ncc wgt-to-usb https://github.com/reisxd/tizen.js/tarball/main @yao-pkg/pkg
-          npm run build
-          rm -rf node_modules
-          rm -rf transpiled
+        run: npm install
+
+      - name: Install UI dependencies
+        working-directory: client/ui
+        run: npm install --force
 
       - name: Build UI
         working-directory: client/ui
-        run: |
-          npm install --force
-          npm run build
-          rm -rf node_modules
+        run: npm run build
 
-      - name: Prepare Tizen Certificate
-        run: |
-          echo "${{ secrets.TIZEN_AUTHOR_KEY }}" | base64 -d > "${GITHUB_WORKSPACE}/tizenbrew-author.p12"
+      - name: Build service bundle
+        working-directory: client/services/tizenbrew-installer-service
+        run: npm run build
 
-      - name: Build TizenBrew
-        working-directory: client
-        run: |
-          mkdir release
-          tizenjs build . -t wgt -o release/TizenBrewInstaller.wgt --author "${GITHUB_WORKSPACE}/tizenbrew-author.p12" --authorPwd '${{ secrets.TIZEN_AUTHOR_KEY_PW }}' -p public --ignore node_modules,/.*\.wgt$/,/userwidget/,/release/
+      - name: Install Electron dependencies
+        working-directory: electron
+        run: npm install
 
-      - name: Change Package ID for USB Demo
-        working-directory: client
-        run: |
-          sed -i 's/xvvl3S1bTI/xvvl3S1bTU/g' config.xml
+      - name: Build Electron app
+        working-directory: electron
+        run: npm run build
 
-      - name: Build TizenBrew for USB Demo
-        working-directory: client
-        run: |
-          tizenjs build . -t wgt -o Installer.wgt --author "${GITHUB_WORKSPACE}/tizenbrew-author.p12" --authorPwd '${{ secrets.TIZEN_AUTHOR_KEY_PW }}' -p public --ignore node_modules,/.*\.wgt$/,/userwidget/,/release/
-
-      - name: Package TizenBrew as USB Demo Package
-        working-directory: client
-        run: |
-          wgt-to-usb Installer.wgt 
-
-      - name: Upload TizenBrew package artifact for Old Tizen
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-            name: app-${{ github.sha }}-old.wgt
-            path: client/release/TizenBrewInstaller.wgt
-      
-      - name: Zip USB Demo Package
-        working-directory: client
-        run: |
-          zip -r release/userwidget.zip userwidget/
-      
-      - name: Release TizenBrew Build Results
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.RELEASE_VERSION }}
-          target_commitish: ${{ github.sha }}
-          files: |
-            client/release/*
+          name: moonlight-installer-${{ matrix.os }}
+          path: |
+            electron/dist/*.AppImage
+            electron/dist/*.dmg
+            electron/dist/*.exe
+            electron/dist/*.zip
 
-      - name: Build Installer Desktop
-        working-directory: client
-        run: |
-          pkg -C GZip . --no-bytecode --public
-        
-      - name: Release Installer Desktop
-        uses: softprops/action-gh-release@v1
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_VERSION }}
-          target_commitish: ${{ github.sha }}
-          files: |
-            client/dist/*
+          path: artifacts
+          merge-multiple: true
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/*
+          generate_release_notes: true
