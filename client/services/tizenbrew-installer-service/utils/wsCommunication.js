@@ -18,7 +18,6 @@ class Connection {
 
 const Events = {
     InstallPackage: 1,
-    NavigateDirectory: 2,
     Error: 3,
     InstallationStatus: 4,
     DeleteConfiguration: 5,

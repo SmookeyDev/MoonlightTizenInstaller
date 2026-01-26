@@ -1,11 +1,23 @@
 const { Signature, SamsungCertificateCreator } = require('tizen')
-const { getDuid } = require('./Buxton2.js');
 const forge = require('node-forge');
 const JSZip = require('jszip');
 
-function createSamsungCertificate(authorInfo, accessInfo, adbClient, isTV) {
+function getDuid(adbClient) {
     return new Promise((resolve, reject) => {
-        getDuid(adbClient, isTV)
+        const stream = adbClient.createStream('shell:0 getduid')
+        stream.on('data', (data) => {
+            const duid = data.toString().trim();
+            resolve(duid);
+        });
+        stream.on('error', (error) => {
+            reject(error);
+        });
+    });
+}
+
+function createSamsungCertificate(authorInfo, accessInfo, adbClient) {
+    return new Promise((resolve, reject) => {
+        getDuid(adbClient)
             .then(duid => {
                 const creator = new SamsungCertificateCreator();
                 creator.createCertificate(authorInfo, accessInfo, [duid])
