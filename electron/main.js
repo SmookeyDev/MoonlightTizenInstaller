@@ -27,7 +27,8 @@ function startService() {
 
     serviceProcess = spawn('node', [serviceFile], {
         cwd: servicePath,
-        stdio: 'inherit',
+        stdio: isDev ? 'inherit' : 'ignore',
+        windowsHide: true,
         env: {
             ...process.env,
             UI_PATH: isDev
