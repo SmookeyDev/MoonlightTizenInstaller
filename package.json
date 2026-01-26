@@ -1,0 +1,23 @@
+{
+  "name": "moonlight-tizen-installer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Install Moonlight on Samsung Tizen TVs",
+  "workspaces": [
+    "client/ui",
+    "client/services/tizenbrew-installer-service",
+    "electron"
+  ],
+  "scripts": {
+    "dev": "npm run start -w moonlight-installer-service",
+    "dev:ui": "npm run dev -w moonlight-installer-ui",
+    "build": "npm run build:ui && npm run build:service",
+    "build:ui": "npm run build -w moonlight-installer-ui",
+    "build:service": "npm run build -w moonlight-installer-service",
+    "start": "npm run start -w moonlight-installer-service",
+    "electron": "npm run start -w moonlight-tizen-installer-electron",
+    "electron:build": "npm run build && cd electron && npm run build"
+  },
+  "author": "SmookeyDev",
+  "license": "GPL-3.0-only"
+}

@@ -1,5 +1,22 @@
 node_modules
 dist
+transpiled
 userwidget
 *.wgt
 *.zip
+
+# Electron
+electron/dist
+electron/node_modules
+
+# Docker
+docker/.env
+
+# IDE
+.idea
+.vscode
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
