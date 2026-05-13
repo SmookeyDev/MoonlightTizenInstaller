@@ -1,6 +1,6 @@
 {
   "name": "moonlight-tizen-installer-electron",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Desktop app for installing Moonlight on Samsung Tizen TVs",
   "homepage": "https://github.com/SmookeyDev/MoonlightTizenInstaller",
   "main": "main.js",

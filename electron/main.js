@@ -25,12 +25,13 @@ function startService() {
     const servicePath = getServicePath();
     const serviceFile = isDev ? '.' : 'index.js';
 
-    serviceProcess = spawn('node', [serviceFile], {
+    serviceProcess = spawn(process.execPath, [serviceFile], {
         cwd: servicePath,
         stdio: isDev ? 'inherit' : 'ignore',
         windowsHide: true,
         env: {
             ...process.env,
+            ELECTRON_RUN_AS_NODE: '1',
             UI_PATH: isDev
                 ? path.join(__dirname, '..', 'client', 'ui', 'dist')
                 : path.join(process.resourcesPath, 'ui')
